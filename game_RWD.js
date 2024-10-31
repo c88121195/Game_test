@@ -317,7 +317,7 @@ function isTouchDevice() {
   return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
 }
 
-if (isTouchDevice) {
+if (isTouchDevice()) {
   // 若判定為可觸控裝置，處理以下按鈕事件
   controlbtn.innerHTML = `
   <img id="leftBtn" src="btn/control_left.png" alt="left">
