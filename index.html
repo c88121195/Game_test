@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="viewport"
-          <title>全視窗橫向卷軸遊戲</title>
+    <title>全視窗橫向卷軸遊戲</title>
     <style>
         html,
         body {
@@ -32,6 +31,18 @@
             width: 100vh;
             height: 100vw;
         } */
+
+        /* 設置按鈕樣式 */
+        #controlBtn img {
+            width: 50px;
+            height: 50px;
+            transition: transform 0.1s;
+        }
+
+        /* 點擊時縮小按鈕 */
+        #controlBtn img:active {
+            transform: scale(0.9);
+        }
     </style>
 </head>
 

@@ -309,33 +309,88 @@ function movePlayer() { // 垂直重力處理
 // window.addEventListener('resize', handleOrientationChange);
 
 
-// 處理鍵盤事件
-document.addEventListener('keydown', (e) => {
+// 設置一個函數檢查裝置是否為觸控
+function isTouchDevice() {
+  // 檢查 window 物件中是否包含 'ontouchstart' 屬性，表示是否支持觸控事件 
+  // 或者檢查 navigator 物件中的 maxTouchPoints 屬性是否大於 0 
+  // 或者檢查 navigator 物件中的 msMaxTouchPoints 屬性是否大於 0（適用於某些舊版IE瀏覽器)
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
+}
 
-  if (e.key === 'ArrowRight' && !player.isAttacking) {
+if (isTouchDevice) {
+  // 若判定為可觸控裝置，處理以下按鈕事件
+  controlbtn.innerHTML = `
+  <img id="leftBtn" src="btn/control_left.png" alt="left">
+  <img id="rightBtn" src="btn/control_right.png" alt="right">
+  <img id="upBtn" src="btn/control_up.png" alt="up">
+  `
+  attackBtn.innerHTML = `
+  <img id="attackBtn" src="btn/attack.png" alt="attack">
+  `
+  const leftBtn = document.getElementById('leftBtn')
+  const rightBtn = document.getElementById('rightBtn')
+  const upBtn = document.getElementById('upBtn')
+
+  rightBtn.addEventListener('touchstart', function () {
     player.dx = player.speed;
     player.direction = 'right';
     player.standing = false;
-  } else if (e.key === 'ArrowLeft' && !player.isAttacking) {
-    player.dx = -player.speed;
+  })
+
+  leftBtn.addEventListener('touchstart', function () {
+    player.dx = player.speed;
     player.direction = 'left';
     player.standing = false;
-  } else if (e.key === ' ' && player.onGround) {
+  })
+
+  upBtn.addEventListener('touchstart', function () {
     player.dy = -15;
     player.isJumping = true;
     player.onGround = false;
-  } else if (e.key === 'z' || e.key === 'Z') {
+  })
+
+  attackBtn.addEventListener('touchstart', function () {
     player.isAttacking = true;
     player.frameIndex = 0;
-  }
-});
+  })
 
-document.addEventListener('keyup', (e) => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+  // 設置人物走動按鈕放開後的動作
+  function handleTouchEnd() {
     player.dx = 0;
     player.standing = true;
   }
-});
+
+  rightBtn.addEventListener('touchend', handleTouchEnd)
+  leftBtn.addEventListener('touchend', handleTouchEnd)
+
+} else {
+  // 處理鍵盤事件
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' && !player.isAttacking) {
+      player.dx = player.speed;
+      player.direction = 'right';
+      player.standing = false;
+    } else if (e.key === 'ArrowLeft' && !player.isAttacking) {
+      player.dx = -player.speed;
+      player.direction = 'left';
+      player.standing = false;
+    } else if (e.key === ' ' && player.onGround) {
+      player.dy = -15;
+      player.isJumping = true;
+      player.onGround = false;
+    } else if (e.key === 'z' || e.key === 'Z') {
+      player.isAttacking = true;
+      player.frameIndex = 0;
+    }
+  });
+
+  document.addEventListener('keyup', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      player.dx = 0;
+      player.standing = true;
+    }
+  });
+}
 
 // 更新遊戲畫面
 function update() {
