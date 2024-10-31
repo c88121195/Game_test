@@ -1,0 +1,15 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;  /* 禁止滾動條 */
+    width: 100%;
+    height: 100%;
+  }
+  
+  canvas {
+    display: block;
+    width: 100vw;  /* 填滿視窗寬度 */
+    height: 100vh;  /* 填滿視窗高度 */
+    background-color: black;
+  }
+  
