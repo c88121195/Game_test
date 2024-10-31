@@ -283,30 +283,30 @@ function movePlayer() { // 垂直重力處理
 }
 
 // 設置讓畫面全屏的函數
-function enterFullScreen() {
-  const elem = document.documentElement;
-  if (elem.requestFullscreen) {
-    elem.requestFullscreen();
-  } else if (elem.mozRequestFullscreen) {
-    elem.mozRequestFullscreen();
-  } else if (elem.webkitRequestFullscreen) {
-    elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-    elem.msRequestFullscreen();
-  }
-}
+// function enterFullScreen() {
+//   const elem = document.documentElement;
+//   if (elem.requestFullscreen) {
+//     elem.requestFullscreen();
+//   } else if (elem.mozRequestFullscreen) {
+//     elem.mozRequestFullscreen();
+//   } else if (elem.webkitRequestFullscreen) {
+//     elem.webkitRequestFullscreen();
+//   } else if (elem.msRequestFullscreen) {
+//     elem.msRequestFullscreen();
+//   }
+// }
 
 // 設置當畫面寬度小於高度時強制橫屏的函數
-function handleOrientationChange() {
-  if (window.innerHeight > window.innerWidth) {
-    document.body.classList.add('rotate');
-  } else {
-    document.body.classList.remove('rotate');
-  }
-}
-enterFullScreen();
-handleOrientationChange();
-window.addEventListener('resize', handleOrientationChange);
+// function handleOrientationChange() {
+//   if (window.innerHeight > window.innerWidth) {
+//     document.body.classList.add('rotate');
+//   } else {
+//     document.body.classList.remove('rotate');
+//   }
+// }
+// enterFullScreen();
+// handleOrientationChange();
+// window.addEventListener('resize', handleOrientationChange);
 
 
 // 處理鍵盤事件
